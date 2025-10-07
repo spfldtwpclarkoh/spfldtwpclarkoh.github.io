@@ -35,13 +35,8 @@
                 <img src="./images/logo.png" alt="STFD Logo" class="h-12 w-12 mr-3">
                 <a href="#" class="text-xl font-bold text-gray-800 md:text-2xl">Springfield Township <span class="text-red-700">Fire Department</span></a>
             </div>
-            <div class="hidden md:flex items-center space-x-6">
-                <a href="https://stfdclarkoh.com" class="text-gray-600 hover:text-red-600 transition duration-300">Home</a>
-                <a href="#about" class="text-gray-600 hover:text-red-700">About Us</a>
-                <a href="#services" class="text-gray-600 hover:text-red-700">Services</a>
-                <a href="https://stfdclarkoh.com/community" class="text-gray-600 hover:text-red-700">Community Outreach</a>
-                <a href="#safety" class="text-gray-600 hover:text-red-700">Safety Tips</a>
-                <a href="#contact" class="text-gray-600 hover:text-red-700">Contact</a>
+            <div id="desktop-nav" class="hidden md:flex items-center space-x-6">
+                <!-- Desktop navigation links will be dynamically inserted here -->
             </div>
             <div class="md:hidden">
                 <button id="menu-btn" class="text-gray-600 hover:text-red-700 focus:outline-none">
@@ -51,12 +46,7 @@
         </nav>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="md:hidden hidden px-6 pt-2 pb-4 space-y-2 bg-white">
-            <a href="https://stfdclarkoh.com" class="text-gray-600 hover:text-red-600 transition duration-300">Home</a>
-            <a href="#about" class="block text-gray-600 hover:text-red-700">About Us</a>
-            <a href="#services" class="block text-gray-600 hover:text-red-700">Services</a>
-            <a href="https://stfdclarkoh.com/community" class="block text-gray-600 hover:text-red-700">Community Outreach</a>
-            <a href="#safety" class="block text-gray-600 hover:text-red-700">Safety Tips</a>
-            <a href="#contact" class="block text-gray-600 hover:text-red-700">Contact</a>
+            <!-- Mobile navigation links will be dynamically inserted here -->
         </div>
     </header>
 
@@ -73,13 +63,11 @@
         </section>
 
         <!-- Alert Banner -->
-        <div class="bg-yellow-400 text-yellow-900">
+        <div id="alert-banner" class="bg-yellow-400 text-yellow-900 hidden">
             <div class="container mx-auto px-6 py-3 text-center font-semibold">
-                <i class="fas fa-exclamation-triangle mr-2"></i> Current Burn Ban Status: <span class="font-bold">IN EFFECT</span>. Please burn responsibly. <p><span style="color: #ff0000;"><a style="color: #ff0000;" href="https://stfdclarkoh.com/burnlaws" target="_blank">Click Here</a></span>&nbsp;to see Ohio Laws</p>
+                <i class="fas fa-exclamation-triangle mr-2"></i> Current Burn Ban Status: <span id="burn-status" class="font-bold"></span>. <span id="alert-text"></span> <a href="https://stfdclarkoh.com/burnlaws" target="_blank" class="text-red-700 hover:underline">Click Here to see Ohio Laws</a>
             </div>
         </div>
-
-
 
         <!-- Services Section -->
         <section id="services" class="py-16 bg-gray-50">
@@ -219,19 +207,91 @@
         </div>
     </footer>
 
+    <script type="module">
+        // --- Firebase Imports ---
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getFirestore, doc, onSnapshot } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // --- Firebase Configuration ---
+        const firebaseConfig = {
+          apiKey: "AIzaSyDjyl2w-HAUUSJa7wy78b9q4XOaUUaMojo",
+          authDomain: "stfd-website.firebaseapp.com",
+          projectId: "stfd-website",
+          storageBucket: "stfd-website.firebasestorage.app",
+          messagingSenderId: "52225510209",
+          appId: "1:52225510209:web:27d5b5846acedf55adefc0",
+          measurementId: "G-FL35VMGQ9F"
+        };
+        
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-stfd-website';
+
+        // --- Initialize Firebase ---
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // --- Firestore Document Reference ---
+        const contentRef = doc(db, 'artifacts', appId, 'public', 'siteContent');
+        
+        // --- Listen for Content Updates ---
+        const desktopNav = document.getElementById('desktop-nav');
+        const mobileMenuContainer = document.getElementById('mobile-menu');
+
+        onSnapshot(contentRef, (doc) => {
+            if (doc.exists()) {
+                const data = doc.data();
+
+                // Update Alert Banner
+                const alertBanner = document.getElementById('alert-banner');
+                if (data.burnStatus && data.burnStatus !== 'none') {
+                    document.getElementById('burn-status').textContent = data.burnStatus;
+                    document.getElementById('alert-text').textContent = data.alertText;
+                    alertBanner.classList.remove('hidden');
+                } else {
+                    alertBanner.classList.add('hidden');
+                }
+
+                // Update Header Links
+                if (data.links && Array.isArray(data.links)) {
+                    // Clear existing links
+                    desktopNav.innerHTML = '';
+                    mobileMenuContainer.innerHTML = '';
+
+                    data.links.forEach(link => {
+                        // Create and append desktop link
+                        const desktopLink = document.createElement('a');
+                        desktopLink.href = link.href;
+                        desktopLink.textContent = link.text;
+                        desktopLink.className = 'text-gray-600 hover:text-red-700 transition duration-300';
+                        desktopNav.appendChild(desktopLink);
+
+                        // Create and append mobile link
+                        const mobileLink = document.createElement('a');
+                        mobileLink.href = link.href;
+                        mobileLink.textContent = link.text;
+                        mobileLink.className = 'block text-gray-600 hover:text-red-700';
+                        mobileMenuContainer.appendChild(mobileLink);
+                    });
+                }
+            } else {
+                console.log("No content document found!");
+            }
+        });
+
+    </script>
     <script>
+        // --- Mobile Menu Toggle ---
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        const mobileLinks = mobileMenu.querySelectorAll('a');
 
         menuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
         
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
+        // Use event delegation for dynamically added mobile links
+        mobileMenu.addEventListener('click', (event) => {
+            if (event.target.tagName === 'A') {
                 mobileMenu.classList.add('hidden');
-            });
+            }
         });
     </script>
 </body>
