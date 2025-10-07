@@ -1,10 +1,239 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>My Website</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STFD</title>
+    <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./images/truck.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        .stat-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+    </style>
 </head>
-<body>
-  <h1>Welcome!</h1>
-  <p>My site is now working.</p>
+<body class="bg-gray-100 text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-3 flex justify-between items-center">
+            <div class="flex items-center">
+                <img src="./images/logo.png" alt="STFD Logo" class="h-12 w-12 mr-3">
+                <a href="#" class="text-xl font-bold text-gray-800 md:text-2xl">Springfield Township <span class="text-red-700">Fire Department</span></a>
+            </div>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="https://stfdclarkoh.com" class="text-gray-600 hover:text-red-600 transition duration-300">Home</a>
+                <a href="#about" class="text-gray-600 hover:text-red-700">About Us</a>
+                <a href="#services" class="text-gray-600 hover:text-red-700">Services</a>
+                <a href="https://stfdclarkoh.com/community" class="text-gray-600 hover:text-red-700">Community Outreach</a>
+                <a href="#safety" class="text-gray-600 hover:text-red-700">Safety Tips</a>
+                <a href="#contact" class="text-gray-600 hover:text-red-700">Contact</a>
+            </div>
+            <div class="md:hidden">
+                <button id="menu-btn" class="text-gray-600 hover:text-red-700 focus:outline-none">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
+            </div>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="md:hidden hidden px-6 pt-2 pb-4 space-y-2 bg-white">
+            <a href="https://stfdclarkoh.com" class="text-gray-600 hover:text-red-600 transition duration-300">Home</a>
+            <a href="#about" class="block text-gray-600 hover:text-red-700">About Us</a>
+            <a href="#services" class="block text-gray-600 hover:text-red-700">Services</a>
+            <a href="https://stfdclarkoh.com/community" class="block text-gray-600 hover:text-red-700">Community Outreach</a>
+            <a href="#safety" class="block text-gray-600 hover:text-red-700">Safety Tips</a>
+            <a href="#contact" class="block text-gray-600 hover:text-red-700">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-bg text-white">
+            <div class="container mx-auto px-6 py-32 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4">Protecting Our Community With Pride</h1>
+                <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto">Serving the citizens of Springfield Township with courage, compassion, and commitment since 1952.</p>
+                <a href="#contact" class="bg-red-700 hover:bg-red-800 text-white font-bold py-3 px-8 rounded-lg transition duration-300 ease-in-out text-lg">
+                    In Case of Emergency, Dial 911
+                </a>
+            </div>
+        </section>
+
+        <!-- Alert Banner -->
+        <div class="bg-yellow-400 text-yellow-900">
+            <div class="container mx-auto px-6 py-3 text-center font-semibold">
+                <i class="fas fa-exclamation-triangle mr-2"></i> Current Burn Ban Status: <span class="font-bold">IN EFFECT</span>. Please burn responsibly. <p><span style="color: #ff0000;"><a style="color: #ff0000;" href="https://stfdclarkoh.com/burnlaws" target="_blank">Click Here</a></span>&nbsp;to see Ohio Laws</p>
+            </div>
+        </div>
+
+
+
+        <!-- Services Section -->
+        <section id="services" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Our Services</h2>
+                <p class="text-gray-600 mb-12 max-w-2xl mx-auto">We provide a wide range of services to ensure the safety and well-being of our community.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <div class="text-red-700 mb-4">
+                            <i class="fas fa-fire-extinguisher fa-3x"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2">Fire Suppression</h3>
+                        <p class="text-gray-600">Rapid response to all types of fires, including structural, wildland, and vehicle fires.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <div class="text-red-700 mb-4">
+                            <i class="fas fa-ambulance fa-3x"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2">Emergency Medical</h3>
+                        <p class="text-gray-600">Advanced and basic life support services provided by certified firefighter/paramedics.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <div class="text-red-700 mb-4">
+                            <i class="fas fa-search-plus fa-3x"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2">Search & Rescue</h3>
+                        <p class="text-gray-600">Specialized teams for technical rescue situations, including water and confined space rescue.</p>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
+                        <div class="text-red-700 mb-4">
+                            <i class="fas fa-school fa-3x"></i>
+                        </div>
+                        <h3 class="font-bold text-xl mb-2">Public Education</h3>
+                        <p class="text-gray-600">Community programs on fire safety, CPR training, and smoke detector installation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Photo Gallery Section -->
+        <section id="gallery" class="py-16 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Community Moments</h2>
+                <p class="text-gray-600 mb-8 max-w-2xl mx-auto">A glimpse into our department's life and community involvement.</p>
+                
+                <!-- Elfsight Photo Gallery | Untitled Photo Gallery -->
+                <script src="https://elfsightcdn.com/platform.js" async></script>
+                <div class="elfsight-app-55c111a2-7bfa-4175-a5cb-aed0f4af9391" data-elfsight-app-lazy></div>
+            </div>
+        </section>
+
+        <!-- Safety Tips Section -->
+        <section id="safety" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Community Fire Safety</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="rounded-lg overflow-hidden shadow-lg">
+                        <img src="./images/sd.png" alt="Smoke Detector" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="font-bold text-xl mb-2">Smoke Alarms Save Lives</h3>
+                            <p class="text-gray-600 mb-4">Install smoke alarms on every level of your home, inside bedrooms and outside sleeping areas. Test them once a month.</p>
+                            <a href="https://www.usfa.fema.gov/prevention/home-fires/prepare-for-fire/smoke-alarms/" class="text-red-700 font-semibold hover:underline">Learn More &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="rounded-lg overflow-hidden shadow-lg">
+                        <img src="./images/fep.png" alt="Family drawing an escape plan" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="font-bold text-xl mb-2">Create an Escape Plan</h3>
+                            <p class="text-gray-600 mb-4">Your family should know two ways out of every room and have a designated meeting spot outside. Practice your plan twice a year.</p>
+                            <a href="https://www.usfa.fema.gov/prevention/home-fires/prepare-for-fire/home-fire-escape-plans/" class="text-red-700 font-semibold hover:underline">Plan Your Escape &rarr;</a>
+                        </div>
+                    </div>
+                    <div class="rounded-lg overflow-hidden shadow-lg">
+                        <img src="./images/cooking.jpg" alt="A clean kitchen stove" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="font-bold text-xl mb-2">Kitchen Fire Safety</h3>
+                            <p class="text-gray-600 mb-4">Stay in the kitchen when you are frying, grilling, or broiling food. Keep flammable items away from your stovetop.</p>
+                            <a href="https://www.nfpa.org/education-and-research/home-fire-safety/cooking" class="text-red-700 font-semibold hover:underline">Cooking Safety Tips &rarr;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="py-16 bg-gray-800 text-white">
+            <div class="container mx-auto px-6">
+                <div class="text-center">
+                    <h2 class="text-3xl font-bold mb-4">Contact Us</h2>
+                    <p class="text-gray-300 mb-8 max-w-2xl mx-auto">We are here for you. For emergencies, please dial 911 immediately. For non-emergencies, use the information below.</p>
+                </div>
+                <div class="flex flex-col md:flex-row justify-around items-center gap-8">
+                     <div class="text-center">
+                        <div class="bg-red-700 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-phone-alt fa-2x"></i>
+                        </div>
+                        <h3 class="font-bold text-xl">Non-Emergency Line</h3>
+                        <p class="text-gray-300">(937) 328-2560</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-red-700 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-map-marker-alt fa-2x"></i>
+                        </div>
+                        <h3 class="font-bold text-xl">Station 1 (58) Headquarters</h3>
+                        <p class="text-gray-300">2777 Springfield-Xenia Rd, Springfield, OH 45506</p>
+                        <br>
+                        <h3 class="font-bold text-xl">Station 2 (72)</h3>
+                        <p class="text-gray-300">3430 E National Rd, Springfield, OH 45503</p>
+                        <br>
+                        <h3 class="font-bold text-xl">Station 3 (56)</h3>
+                        <p class="text-gray-300">3650 W National Rd, Springfield, OH 45504</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-red-700 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-envelope fa-2x"></i>
+                        </div>
+                        <h3 class="font-bold text-xl">General Inquiries</h3>
+                        <p class="text-gray-300">firedepartment@spfldtwp.org</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="container mx-auto px-6 py-8">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-sm text-gray-400">&copy; 2024 Springfield Township Fire Department. All Rights Reserved.</p>
+                <div class="flex mt-4 md:mt-0 space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter fa-lg"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram fa-lg"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
 </body>
 </html>
+
